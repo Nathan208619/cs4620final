@@ -20,7 +20,7 @@ if response.status_code == 200:
             solo = cell_parts[4]
             as_featured = cell_parts[5]
             # pull text out of the cells, print recombined strings
-            print(artist.text.strip() + ' - ' + stream_count.text.strip() + ' - ' + daily_trend.text.strip() + ' - ' + as_lead.text.strip() + ' - ' + solo.text.strip() + ' - ' + as_featured.text.strip())
+            print(artist.text.strip() + '-' + stream_count.text.strip() + '-' + daily_trend.text.strip() + '-' + as_lead.text.strip() + '-' + solo.text.strip() + '-' + as_featured.text.strip())
     else:
         print("Error: table not found in the page") # table not found error message
 else:

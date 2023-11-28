@@ -39,7 +39,7 @@ def generate_database():
                                 );"""
     
     albums = """CREATE TABLE IF NOT EXISTS most_streamed_album (
-                    album_id integer PRIMARY KEY NOT NULL,
+                    album_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                     album text NOT NULL,
                     artist text NOT NULL,
                     streams integer NOT NULL,
@@ -47,7 +47,7 @@ def generate_database():
                                 );"""
     
     artists = """CREATE TABLE IF NOT EXISTS most_streamed_artist (
-                    artist_id integer PRIMARY KEY NOT NULL,
+                    artist_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                     artist text NOT NULL,
                     streams integer NOT NULL,
                     daily_streams integer,

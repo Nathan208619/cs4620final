@@ -17,7 +17,7 @@ if response.status_code == 200:
             stream_count = cell_parts[1]
             daily_trend = cell_parts[2]
             # pull text out of the cells, print recombined strings
-            print(album_artist_title.text.strip() + ' - ' + stream_count.text.strip() + ' - ' + daily_trend.text.strip())
+            print(album_artist_title.text.strip() + '-' + stream_count.text.strip() + '-' + daily_trend.text.strip())
     else:
         print("Error: table not found in the page") # table not found error message
 else:
