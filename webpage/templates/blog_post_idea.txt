@@ -1,0 +1,1 @@
+remove commas from numbers in to allow sorting to work properly

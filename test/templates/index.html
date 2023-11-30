@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Charts with Flask</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Dynamic Charts</h1>
+    
+    <button onclick="generateChart('line')">Generate Line Chart</button>
+    <button onclick="generateChart('bar')">Generate Bar Chart</button>
+    
+    <div id="chart-container"></div>
+
+    <script>
+        function generateChart(chartType) {
+            fetch('/generate_chart/' + chartType)
+                .then(response => response.json())
+                .then(data => Plotly.newPlot('chart-container', data));
+        }
+    </script>
+</body>
+</html>

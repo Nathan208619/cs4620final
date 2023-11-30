@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <title>Spotify Stats Visualizer</title>
+    <style>
+        .full_section {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Container for the first color */
+        .section_1 {
+            flex: 1;
+            background-color: #0055A4;
+        }
+
+        /* Container for the second color */
+        .section_2 {
+            flex: 1;
+            background-color: #FFF;
+        }
+
+        /* Container for the third color */
+        .section_3 {
+            flex: 1;
+            background-color: #EF4135;
+        }
+
+        .title_container {
+            display: flex;
+            justify-content: center;
+            height: 25vh;
+        }
+
+        /* button styling */
+        .buttons {
+            padding: 30px 30px;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .button_songs {
+            background-color: #0055A4;
+        }
+
+        .button_artists {
+            background-color: #FFF;
+        }
+
+        .button_albums {
+            background-color: #EF4135;
+            /* background-color: rgb(218, 129, 13); */
+            /* background-color: rgb(0, 0, 0); */
+        }
+
+
+        /* button hover effect */
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+
+    </style>
+</head>
+
+<body>
+    <div class="title_container">
+        <h1>Spotify Statistics Visualized</h1>
+    </div>
+</body>
+
+<body>
+    <div class="title_container">
+    </div>
+
+    <div class="full_section">
+        <div class="section_1">
+            <a href="{{ url_for('artist_page') }}"><button class="buttons button_songs">Artists</button></a>
+        </div>
+
+        <div class="section_2">
+            <a href="{{ url_for('song_page') }}"><button class="buttons button_artists">Songs</button></a>
+        </div>
+
+        <div class="section_3">
+            <a href="{{ url_for('album_page') }}"><button class="buttons button_albums">Albums</button></a>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

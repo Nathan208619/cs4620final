@@ -1,0 +1,9 @@
+There should be a four different pages
+The main page will have three buttons, each one an option that corresponds to a query type
+When the user clicks on of the buttons, they will be taken to another page
+On one page they will be able to enter an artists name, then some visualizations about their stats will load
+On another they will be able to enter a song's name and get some visualizations for information
+On the third page they will be able to enter an album's name and get some visualizations about it
+There should be buttons to reset the pages so the user can enter new information and generate new visualizations
+There should be navigation between the main page and the other pages
+Finally, there could be one more page with some buttons to load some preset queries and visualizations
