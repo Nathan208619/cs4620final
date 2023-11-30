@@ -23,10 +23,11 @@ def main():
 def artist_page():
     if request.method == 'POST':
         artist_name = request.form['artist_name']
+        print(artist_name)
         # Perform visualization based on artist_name using execute_query function
         # Example: result = execute_query("SELECT * FROM artists WHERE name=?", (artist_name,))
         # Add your visualization logic here
-        return render_template('artists', artist_name=artist_name)
+        return render_template('artists.html', artist_name=artist_name)
     return render_template('artists.html')
 
 @app.route('/songs', methods=['GET', 'POST'])

@@ -12,45 +12,54 @@
             font-family: Arial, sans-serif;
             display: flex;
             height: 100vh;
-            flex-direction: column;
+            /* flex-direction: column; */
         }
 
         /* Container for the first color */
         .section_1 {
             flex: 1;
             background-color: #0055A4;
+            display: flex; /* Arrange buttons side by side */
+            justify-content: space-around; /* Adjust as needed */
+            align-items: center;
         }
 
         /* Container for the second color */
         .section_2 {
             flex: 1;
             background-color: #FFF;
+            display: flex; /* Arrange buttons side by side */
+            justify-content: space-around; /* Adjust as needed */
+            align-items: center;            
         }
 
         /* Container for the third color */
         .section_3 {
             flex: 1;
             background-color: #EF4135;
-        }
-
-        .title_container {
-            display: flex;
-            justify-content: center;
-            height: 25vh;
+            display: flex; /* Arrange buttons side by side */
+            justify-content: space-around; /* Adjust as needed */
+            align-items: center;
         }
 
         /* button styling */
         .buttons {
             padding: 30px 30px;
             font-size: 24px;
-            border: none;
+            border:hwb(from color h w b);
             border-radius: 15px;
             cursor: pointer;
-            margin: 20px;
+            margin: 10px;
+            background: linear-gradient(to right, #ffffff, #e0e0e0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .button_songs {
             background-color: #0055A4;
+            justify-content: center;
         }
 
         .button_artists {
@@ -74,14 +83,10 @@
 </head>
 
 <body>
-    <div class="title_container">
-        <h1>Spotify Statistics Visualized</h1>
-    </div>
+    <h1>Spotify Statistics Visualized</h1>
 </body>
 
 <body>
-    <div class="title_container">
-    </div>
 
     <div class="full_section">
         <div class="section_1">
@@ -96,8 +101,5 @@
             <a href="{{ url_for('album_page') }}"><button class="buttons button_albums">Albums</button></a>
         </div>
     </div>
-
-
 </body>
-
 </html>
