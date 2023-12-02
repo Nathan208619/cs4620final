@@ -11,12 +11,12 @@ def create_connection(db_file):
 
 def get_data():
     most_streams = []
-    file = open("./data/most_streams.csv", "r")
+    file = open("../data/most_streams.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
         most_streams.append(front + "-" + end)
-    file.close()
+    file.close()    
     return most_streams
 
 def build_streams_table():
@@ -29,6 +29,8 @@ def build_streams_table():
             continue
         artist = parts[0]
         title = parts[1]
+        if "Taylor" in title:
+            print(title)
         total_streams = parts[2].replace(",", "")
         daily_streams = parts[3]
         if len(daily_streams) < 1:
@@ -41,7 +43,7 @@ def build_streams_table():
     conn.close()
 
 def build_listeners_table():
-    file = open("./data/listeners.csv", "r")
+    file = open("../data/listeners.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:
@@ -59,7 +61,7 @@ def build_listeners_table():
 
 def get_album_data():
     most_streams = []
-    file = open("./data/albums.csv", "r")
+    file = open("../data/albums.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
@@ -75,8 +77,8 @@ def build_albums_table():
         parts = entry.split("-")
         if parts.__len__() != 4:
             continue
-        artist = parts[0]
-        album = parts[1]
+        artist = parts[1]
+        album = parts[0]
         streams = parts[2].replace(",", "")
         daily_streams = parts[3].replace(",", "")
         cur.execute("INSERT INTO most_streamed_album (artist, album, streams, daily_streams) VALUES (?, ?, ?, ?)", (album, artist, streams, daily_streams))
@@ -84,7 +86,7 @@ def build_albums_table():
     conn.close()
 
 def build_artists_table():
-    file = open("./data/artists.csv", "r")
+    file = open("../data/artists.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:

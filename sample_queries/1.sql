@@ -1,3 +1,1 @@
-SELECT daily_streams
-FROM most_streams
-ORDER BY daily_streams DESC
+SELECT title, total_streams FROM most_streams WHERE artist='Taylor Swift';
