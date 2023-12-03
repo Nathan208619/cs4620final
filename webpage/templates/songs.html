@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizations</title>
+    <style>
+        body {
+            background-color: black;
+            color: white; /* Set text color to white for better readability on a black background */
+        }
+
+        h1 {
+            color: #1db954;
+        }
+        h2 {
+            color: #1db954;
+        }
+    </style>
+</head>
+<body>
+    <h1>Here are some visualizations for the most streamed songs and ablums on Spotify</h1>
+    <h2>Who is at the top?</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_streamed_songs.png') }}" alt="Chart 1">
+
+    <h2>Who is at the bottom of the top 2000?</h2>
+    <img src="{{ url_for('static', filename='visualizations/least_streamed_songs.png') }}" alt="Chart 2">
+
+    <h2>Who PUTS numbers on the board? (it's Taylor Swift)</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_songs_bar_chart.png') }}" alt="Chart 3">
+
+    <h2>Here is a percentage break down of just the pool of the top 10 artists with the most songs in the top 2000, not all artists</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_songs_pie_chart.png') }}" alt="Chart 4">
+
+    <h2>Who leads the top 200 albums?</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_streamed_albums.png') }}" alt="Chart 5">
+
+    <h2>Who is at the bottom of the top 200?</h2>
+    <img src="{{ url_for('static', filename='visualizations/least_streamed_albums.png') }}" alt="Chart 6">
+
+    <h2>Who has the most albums in the top 200?</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_albums_bar_chart.png') }}" alt="Chart 7">
+
+    <h2>Here is a percentage breakdown of the pool of just the top 10 artist with the most albums in the top 200, not all artists</h2>
+    <img src="{{ url_for('static', filename='visualizations/most_albums_pie_chart.png') }}" alt="Chart 8">
+
+    <h2>Here are the most streamed songs of 2023<h2>
+    <img src="{{ url_for('static', filename='visualizations/2023.png') }}" alt="Chart 9">
+
+    <h2>Here are the most streamed songs of 2022<h2>
+    <img src="{{ url_for('static', filename='visualizations/2022.png') }}" alt="Chart 10">
+
+    <h2>Here are the most streamed songs of 2021<h2>
+    <img src="{{ url_for('static', filename='visualizations/2021.png') }}" alt="Chart 11">
+
+    <h2>Here are the most streamed songs of 2020<h2>
+    <img src="{{ url_for('static', filename='visualizations/2020.png') }}" alt="Chart 12">
+
+</body>
+</html>

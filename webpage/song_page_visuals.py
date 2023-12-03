@@ -29,7 +29,8 @@ def top_ten_most_streamed_songs():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test3.png')
+    plt.savefig('./static/visualizations/most_streamed_songs.png')
+
 
 def top_ten_least_streamed_songs():
     conn = sqlite3.connect("music.db")
@@ -49,7 +50,7 @@ def top_ten_least_streamed_songs():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test4.png')
+    plt.savefig('./static/visualizations/least_streamed_songs.png')
 
 def top_ten_most_streamed_songs_of_year(year):
     conn = sqlite3.connect("music.db")
@@ -67,7 +68,7 @@ def top_ten_most_streamed_songs_of_year(year):
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    file = year + ".png"
+    file = "./static/visualizations/" + year + ".png"
     plt.savefig(file)
 
 def artists_with_most_songs_top_2000():
@@ -83,7 +84,7 @@ def artists_with_most_songs_top_2000():
     title = "Artists with most songs in the top 2000"
     plt.title(title, fontsize=20)
     plt.tight_layout()
-    plt.savefig('test6.png')
+    plt.savefig('./static/visualizations/most_songs_pie_chart.png')
 
     # bar chart
     plt.figure(figsize=(15, 10))
@@ -94,7 +95,7 @@ def artists_with_most_songs_top_2000():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test7.png')
+    plt.savefig('./static/visualizations/most_songs_bar_chart.png')
 
 def top_ten_most_streamed_albums():
     conn = sqlite3.connect("music.db")
@@ -111,7 +112,7 @@ def top_ten_most_streamed_albums():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test8.png')
+    plt.savefig('./static/visualizations/most_streamed_albums.png')
 
 def top_ten_least_streamed_albums():
     conn = sqlite3.connect("music.db")
@@ -130,7 +131,7 @@ def top_ten_least_streamed_albums():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test9.png')
+    plt.savefig('./static/visualizations/least_streamed_albums.png')
 
 def artist_with_the_most_albums_in_top_200():
     conn = sqlite3.connect("music.db")
@@ -145,7 +146,8 @@ def artist_with_the_most_albums_in_top_200():
     title = "Artists with most albums in the top 200"
     plt.title(title, fontsize=20)
     plt.tight_layout()
-    plt.savefig('test10.png')
+    plt.savefig('./static/visualizations/most_albums_pie_chart.png')
+
 
     # bar chart
     plt.figure(figsize=(15, 10))
@@ -156,22 +158,15 @@ def artist_with_the_most_albums_in_top_200():
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
     plt.tight_layout()
-    plt.savefig('test11.png')
+    plt.savefig('./static/visualizations/most_albums_bar_chart.png')
 
-def main():
-    artist = "Drake"
-    # plot_pie_chart(artist)
-    # plot_bar_chart(artist)
-    # top_ten_most_streamed_songs()
-    # top_ten_least_streamed_songs()
-    # top_ten_most_streamed_songs_of_year("2023")
-    # top_ten_most_streamed_songs_of_year("2022")
-    # top_ten_most_streamed_songs_of_year("2021")
-    # top_ten_most_streamed_songs_of_year("2020")
-    artists_with_most_songs_top_2000()
-    top_ten_most_streamed_albums()
-    top_ten_least_streamed_albums()
-    artist_with_the_most_albums_in_top_200()
-
-if __name__ == "__main__":
-    main()
+top_ten_most_streamed_songs()
+top_ten_least_streamed_songs()
+top_ten_most_streamed_songs_of_year("2023")
+top_ten_most_streamed_songs_of_year("2022")
+top_ten_most_streamed_songs_of_year("2021")
+top_ten_most_streamed_songs_of_year("2020")
+artists_with_most_songs_top_2000()
+top_ten_most_streamed_albums()
+top_ten_least_streamed_albums()
+artist_with_the_most_albums_in_top_200()

@@ -41,7 +41,7 @@ def plot_artist_album_chart(artist):
     titles, album_streams = zip(*data)
     
     # Create the bar chart
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(15, 10))
     cmap = get_cmap("Set1")
     colors = cmap(range(len(titles)))
     plt.bar(titles, album_streams, color=colors, edgecolor='black')
@@ -68,13 +68,15 @@ def plot_artist_songs_chart(artist):
     titles, daily_streams = zip(*data)
 
     # Craft the and save the figure
-    plt.figure(figsize=(15, 20))
+    plt.subplots(figsize=(15, 15))
+    # plt.figure(figsize=(15, 20))
     plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
     plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small')
 
     plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
     # chart_title = f"{artist}'s most streamed songs among the top 2000"
     # plt.title(chart_title, y=1, fontsize=20)
+    plt.tight_layout()
     plt.savefig('./static/visualizations/artist_songs.png')
 
 # ---------------------------------------

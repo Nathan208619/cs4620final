@@ -11,7 +11,7 @@ def create_connection(db_file):
 
 def get_data():
     most_streams = []
-    file = open("../data/most_streams.csv", "r", encoding="utf-8")
+    file = open("./data/most_streams.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
@@ -29,8 +29,6 @@ def build_streams_table():
             continue
         artist = parts[0]
         title = parts[1]
-        if "Taylor" in title:
-            print(title)
         total_streams = parts[2].replace(",", "")
         daily_streams = parts[3]
         if len(daily_streams) < 1:
@@ -43,7 +41,7 @@ def build_streams_table():
     conn.close()
 
 def build_listeners_table():
-    file = open("../data/listeners.csv", "r", encoding="utf-8")
+    file = open("./data/listeners.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:
@@ -61,7 +59,7 @@ def build_listeners_table():
 
 def get_album_data():
     most_streams = []
-    file = open("../data/albums.csv", "r", encoding="utf-8")
+    file = open("./data/albums.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
@@ -86,7 +84,7 @@ def build_albums_table():
     conn.close()
 
 def build_artists_table():
-    file = open("../data/artists.csv", "r", encoding="utf-8")
+    file = open("./data/artists.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:
@@ -104,7 +102,41 @@ def build_artists_table():
     file.close()
     conn.close()
 
+def get_year_data(year):
+    year_streams = []
+    path = "./data/" + year + ".csv"
+    file = open(path, "r", encoding="utf-8")
+    for line in file:
+        front = line[:line.find("-") - 1]
+        end = line[line.find("-") + 2:].replace("\n", "")
+        year_streams.append(front + "-" + end)
+    file.close()
+    return year_streams
+
+def build_year_table(year):
+    conn = create_connection("music.db")
+    year_streams = get_year_data(year)
+    cur = conn.cursor()
+    for entry in year_streams:
+        parts = entry.split("-")
+        if parts.__len__() != 4:
+            continue
+        artist = parts[0]
+        title = parts[1]
+        total_streams = parts[2].replace(",", "")
+        daily_streams = parts[3].replace(",", "")
+        command = "INSERT INTO most_streams_of_" + year + " (title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?)"
+        cur.execute(command, (title, artist, total_streams, daily_streams))
+        # cur.execute("INSERT INTO most_streams_of_" + year + " (title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?)", (title, artist, total_streams, daily_streams))
+        conn.commit()
+
+
+
 build_streams_table()
 build_listeners_table()
 build_albums_table()
 build_artists_table()
+build_year_table("2020")
+build_year_table("2021")
+build_year_table("2022")
+build_year_table("2023")

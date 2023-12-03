@@ -1,1 +1,1 @@
-SELECT title, total_streams FROM most_streams WHERE artist='Taylor Swift';
+SELECT artist, COUNT(*) FROM most_streams GROUP BY artist ORDER BY COUNT(*) DESC LIMIT 10;

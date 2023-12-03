@@ -55,7 +55,38 @@ def generate_database():
                     stream_as_feature integer,
                     streams_solo integer
                                 );"""
-
+    
+    most_streams_of_2020 = """CREATE TABLE IF NOT EXISTS most_streams_of_2020 (
+                    streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    title text NOT NULL,
+                    artist text NOT NULL,
+                    total_streams integer NOT NULL,
+                    daily_streams integer
+                            );"""
+    
+    most_streams_of_2021 = """CREATE TABLE IF NOT EXISTS most_streams_of_2021 (
+                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                title text NOT NULL,
+                artist text NOT NULL,
+                total_streams integer NOT NULL,
+                daily_streams integer
+                        );"""
+    
+    most_streams_of_2022 = """CREATE TABLE IF NOT EXISTS most_streams_of_2022 (
+                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                title text NOT NULL,
+                artist text NOT NULL,
+                total_streams integer NOT NULL,
+                daily_streams integer
+                        );"""
+    
+    most_streams_of_2023 = """CREATE TABLE IF NOT EXISTS most_streams_of_2023 (
+                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                title text NOT NULL,
+                artist text NOT NULL,
+                total_streams integer NOT NULL,
+                daily_streams integer
+                        );"""
     # create a database connection
     conn = create_connection(database)
 
@@ -72,6 +103,18 @@ def generate_database():
 
         # create most_streamed_artist table
         create_table(conn, artists)
+
+        # create most_streams_of_2020 table
+        create_table(conn, most_streams_of_2020)
+
+        # create most_streams_of_2021 table
+        create_table(conn, most_streams_of_2021)
+
+        # create most_streams_of_2022 table
+        create_table(conn, most_streams_of_2022)
+
+        # create most_streams_of_2023 table
+        create_table(conn, most_streams_of_2023)
     else:
         print("Error: cannot create the database connection")
 
