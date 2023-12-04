@@ -1,22 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import matplotlib.pyplot as plt
-from matplotlib.cm import get_cmap
+import matplotlib.cm as cm
 
 app = Flask(__name__)
-
-# def execute_query(query):
-    # try:
-        # conn = sqlite3.connect("../music.db")
-        # print(query)
-        # c = conn.cursor()
-        # c.execute(query)
-        # result = c.fetchall()
-        # conn.close()
-        # return result
-    # except sqlite3.Error as e:
-        # print(e)
-        # return []
 
 def query_the_database(conn, query):
     try:
@@ -41,23 +28,21 @@ def plot_artist_album_chart(artist):
     titles, album_streams = zip(*data)
     
     # Create the bar chart
-    plt.figure(figsize=(15, 10))
-    cmap = get_cmap("Set1")
-    colors = cmap(range(len(titles)))
-    plt.bar(titles, album_streams, color=colors, edgecolor='black')
+    plt.figure(figsize=(12, 8))
+    plt.bar(titles, album_streams, color=cm.Paired.colors, edgecolor='black')
     plt.xlabel('Titles')
     plt.ylabel('Album Streams')
     title = f"{artist}'s most streamed albums among the top 200"
     plt.title(title, fontsize=20)
     
     # Rotate x-axis labels for better readability
-    plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
+    plt.xticks(rotation=45, ha='right', fontsize=12)  # Adjust the rotation angle as needed
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_albums.png')
 
 def plot_artist_songs_chart(artist):
 
-    # Query the most_streams table
+    # query the database
     conn = sqlite3.connect("music.db")
     query = "SELECT title, total_streams FROM most_streams WHERE artist=" + "'" + artist + "'"
     data = query_the_database(conn, query)
@@ -67,17 +52,45 @@ def plot_artist_songs_chart(artist):
         return
     titles, daily_streams = zip(*data)
 
-    # Craft the and save the figure
-    plt.subplots(figsize=(15, 15))
-    # plt.figure(figsize=(15, 20))
+    # query the database
+    plt.subplots(figsize=(15, 12))
     plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
     plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small')
 
-    plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
-    # chart_title = f"{artist}'s most streamed songs among the top 2000"
-    # plt.title(chart_title, y=1, fontsize=20)
+    plt.axis('equal')
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_songs.png')
+
+def build_artist_top_songs_by_daily_streams(artist):
+    conn = sqlite3.connect("music.db")
+    query = "SELECT title, daily_streams FROM most_streams WHERE artist='" + artist + "' ORDER BY daily_streams DESC LIMIT 10"
+    data = query_the_database(conn, query)
+    conn.close()
+    if data is None:
+        print(f"No data found for the artist: {artist}")
+        return
+    titles, daily_streams = zip(*data)
+
+    plt.subplots(figsize=(10, 8))
+    plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
+    plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small')
+
+    plt.axis('equal') 
+    plt.title(f"{artist}'s top songs by daily streams", fontsize=20)
+    plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.tight_layout()
+    plt.savefig('static/visualizations/artist_daily_pie.png')
+
+    # create bar chart
+    plt.figure(figsize=(12, 10))
+    plt.bar(titles, daily_streams, color=cm.Paired.colors, edgecolor='black')
+    plt.xlabel('Titles')
+    plt.ylabel('Streams')
+    title = f"{artist}'s top songs by daily streams"
+    plt.title(title, fontsize=20)
+    plt.xticks(rotation=45, ha='right', fontsize=18) 
+    plt.tight_layout()
+    plt.savefig('./static/visualizations/artist_daily_bar.png')
 
 # ---------------------------------------
 
@@ -89,10 +102,9 @@ def main():
 def artist_page():
     if request.method == 'POST':
         artist_name = request.form['artist_name']
-        # Perform visualization based on artist_name using execute_query function
-        print(artist_name)
         plot_artist_album_chart(artist_name)
         plot_artist_songs_chart(artist_name)
+        build_artist_top_songs_by_daily_streams(artist_name)
         return redirect(url_for('visualizations', artist_name=artist_name))
     return render_template('artists.html')
 

@@ -16,15 +16,25 @@
         h2 {
             color: #1db954;
         }
+
+        img {
+            margin: 10px auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <h1>How does {{ artist_name }} perform?</h1>
-    <h2>Here is how {{ artist_name }}'s songs stack up against one another:</h2>
+    <h2>Among their songs in the top 2000, here is how {{ artist_name }}'s songs stack up as a percentages of their total streams in the top 2000:</h2>
     <img src="{{ url_for('static', filename='visualizations/artist_songs.png') }}" alt="Chart 1">
 
-    <h2>How about their albums?:</h2>
+    <h2>Here is how their albums in the top 200 albums stack up:</h2>
     <img src="{{ url_for('static', filename='visualizations/artist_albums.png') }}" alt="Chart 2">
+
+    <h2>Here are their most streamed songs on a daily basis<h2>
+    <img src="{{ url_for('static', filename='visualizations/artist_daily_bar.png') }}" alt="Chart 3">
+    <img src="{{ url_for('static', filename='visualizations/artist_daily_pie.png') }}" alt="Chart 3">
+
 
 </body>
 </html>

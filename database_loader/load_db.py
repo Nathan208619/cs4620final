@@ -94,9 +94,17 @@ def build_artists_table():
         artist = parts[0]
         streams = parts[1].replace(",", "")
         daily_streams = parts[2].replace(",", "")
+        if len(daily_streams) < 1:
+            daily_streams = 0
         stream_as_lead = parts[3].replace(",", "")
+        if len(stream_as_lead) < 1:
+            stream_as_lead = '0'
         stream_as_feature = parts[5].replace(",", "")
+        if len(stream_as_feature) < 1:
+            stream_as_feature = '0'
         streams_solo = parts[4].replace(",", "")
+        if len(streams_solo) < 1:
+            streams_solo = '0'
         cur.execute("INSERT INTO most_streamed_artist (artist, streams, daily_streams, stream_as_lead, stream_as_feature, streams_solo) VALUES (?, ?, ?, ?, ?, ?)", (artist, streams, daily_streams, stream_as_lead, stream_as_feature, streams_solo))
         conn.commit()
     file.close()
