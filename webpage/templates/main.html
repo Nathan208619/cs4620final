@@ -7,46 +7,18 @@
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
     <title>Spotify Stats Visualizer</title>
     <style>
-        .full_section {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-            /* flex-direction: column; */
-        }
-
-        /* Container for the first color */
-        .section_1 {
-            flex: 1;
-            background-color: #0055A4;
-            display: flex; /* Arrange buttons side by side */
-            justify-content: space-around; /* Adjust as needed */
-            align-items: center;
-        }
-
-        /* Container for the second color */
-        .section_2 {
-            flex: 1;
-            background-color: #FFF;
-            display: flex; /* Arrange buttons side by side */
-            justify-content: space-around; /* Adjust as needed */
-            align-items: center;            
-        }
-
-        /* Container for the third color */
-        .section_3 {
-            flex: 1;
-            background-color: #EF4135;
-            display: flex; /* Arrange buttons side by side */
-            justify-content: space-around; /* Adjust as needed */
-            align-items: center;
+        .header {
+            text-align: center;
+            font-size: 50px;
+            margin: 20px;
+            flex-direction: column;
         }
 
         /* button styling */
         .buttons {
             padding: 30px 30px;
             font-size: 24px;
-            border:hwb(from color h w b);
+            border: hwb(from color h w b);
             border-radius: 15px;
             cursor: pointer;
             margin: 10px;
@@ -72,34 +44,58 @@
             /* background-color: rgb(0, 0, 0); */
         }
 
-
-        /* button hover effect */
-        button:hover {
-            opacity: 0.8;
+        .buttons:hover {
+            background: linear-gradient(to right, #ffffff, #f0f0f0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-    </style>
+
+        body {
+            /* background-color: white; */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            color: white;
+            padding: 10px;
+            font-family: 'Arial', sans-serif;
+        }
 
     </style>
+
+    
 </head>
 
 <body>
-    <h1>Spotify Statistics Visualized</h1>
-</body>
-
-<body>
-
-    <div class="full_section">
-        <div class="section_1">
-            <a href="{{ url_for('artist_page') }}"><button class="buttons button_songs">Maestro Showcase</button></a>
-        </div>
-
-        <div class="section_2">
-            <a href="{{ url_for('song_page') }}"><button class="buttons button_artists">Batte of Songs</button></a>
-        </div>
-
-        <div class="section_3">
-            <a href="{{ url_for('album_page') }}"><button class="buttons button_albums">Maestro Melee</button></a>
-        </div>
+    <div class="header">
+        <h1>Spotify Stats Visualizer</h1>
     </div>
+
+    
+    <a href="{{ url_for('album_page') }}"><button class="buttons button_albums">Maestro Melee</button></a>
+    <a href="{{ url_for('song_page') }}"><button class="buttons button_artists">Battle of Songs</button></a>    
+    <a href="{{ url_for('artist_page') }}"><button class="buttons button_songs">Maestro Showcase</button></a>
 </body>
+
 </html>
