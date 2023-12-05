@@ -22,20 +22,21 @@ def most_streamed_artist():
     # create bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    title = "Top 10 most streamed artists"
-    plt.title(title, fontsize=20)
+    plt.xlabel('Artists', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
+    title = "Top 10 Most Streamed Artist"
+    plt.title(title, fontsize=25)
     plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artists_bar.png')
 
     # create pie chart
     plt.figure(figsize=(15, 10))
-    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
+    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
     plt.axis('equal')
-    title = "Top 10 most streamed artists"
-    plt.title(title, fontsize=20)
+    title = "Top 10 Most Streamed Artists"
+    plt.title(title, fontsize=25, y=1.05)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artists_pie.png')
 
@@ -48,20 +49,21 @@ def most_streamed_artist_by_lead():
     # create bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    title = "Top 10 most streamed artists as lead"
-    plt.title(title, fontsize=20)
+    plt.xlabel('Artists', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
+    title = "Top 10 Most Streamed Artists by Lead Streams"
+    plt.title(title, fontsize=25)
     plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_lead_bar.png')
 
     # create pie chart
     plt.figure(figsize=(15, 10))
-    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
-    plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
-    title = "Top 10 most streamed artists as lead"
-    plt.title(title, fontsize=20)
+    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
+    plt.axis('equal')
+    title = "Top 10 Most Streamed Artists by Lead Streams"
+    plt.title(title, fontsize=25, y=1.05)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_lead_pie.png')
 
@@ -74,20 +76,21 @@ def most_streamed_artist_by_feature():
     # create bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    title = "Top 10 most streamed artists as feature"
-    plt.title(title, fontsize=20)
-    plt.xticks(rotation=45, ha='right', fontsize=18)  # Adjust the rotation angle as needed
+    plt.xlabel('Artists', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
+    title = "Top 10 Most Streamed Artists by Feature Streams"
+    plt.title(title, fontsize=25)
+    plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_feature_bar.png')
 
     # create pie chart
     plt.figure(figsize=(15, 10))
-    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
-    plt.axis('equal')  # Equal aspect ratio ensures that the pie chart is circular.
-    title = "Top 10 most streamed artists as feature"
-    plt.title(title, fontsize=20)
+    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
+    plt.axis('equal')
+    title = "Top 10 Most Streamed Artists by Feature Streams"
+    plt.title(title, fontsize=25, y=1.05)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_feature_pie.png')
 
@@ -101,22 +104,23 @@ def most_streamed_artist_by_solo():
     # create bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    title = "Top 10 most streamed artists as solo"
-    plt.title(title, fontsize=20)
+    plt.xlabel('Artists', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
+    title = "Top 10 Most Streamed Artists by Solo Streams"
+    plt.title(title, fontsize=25)
     plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_solo_bar.png')
 
     # create donut chart
     plt.figure(figsize=(15, 10))
-    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
+    plt.pie(streams, labels=artists, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
     center_circle = plt.Circle((0, 0), 0.7, color='white', linewidth=0.5)
     plt.gca().add_artist(center_circle)
     plt.axis('equal')
-    title = "Top 10 most streamed artists as solo"
-    plt.title(title, fontsize=20)
+    title = "Top 10 Most Streamed Artists by Solo Streams"
+    plt.title(title, fontsize=25, y=1.05)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artist_by_solo_donut.png')
 
@@ -140,11 +144,12 @@ def stacked_bar_chart():
 
     # Plotting bars for solo streams
     # plt.bar(artists, streams_solo, color='green', label='Solo', edgecolor='black', bottom=bottom)
-    plt.xticks(rotation=45, ha='right', fontsize=15)
+    plt.xticks(rotation=28, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.legend()
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    plt.title('Streams Breakdown for Artist')
+    plt.xlabel('Artists', fontsize=18)  
+    plt.ylabel('Streams', fontsize=18)
+    plt.title('Streams Breakdown for Top 10 Artists', fontdict={'fontsize': 25})
     plt.savefig('./static/visualizations/artist_battle/stacked_bar_chart.png')
 
 def most_streamed_artist_by_daily_streams():
@@ -156,11 +161,12 @@ def most_streamed_artist_by_daily_streams():
     # create bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Artists')
-    plt.ylabel('Streams')
-    title = "Top 10 most streamed artists by daily streams"
-    plt.title(title, fontsize=20)
+    plt.xlabel('Artists', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
+    title = "Top 10 Most Streamed Artists by Daily Streams"
+    plt.title(title, fontsize=25)
     plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/most_streamed_artists_by_daily_streams_bar.png')
 
@@ -174,11 +180,12 @@ def top_10_artists_by_listeners():
     # make bar chart
     plt.figure(figsize=(15, 10))
     plt.bar(artists, listeners, color=cm.Paired.colors, edgecolor='black', linewidth=2)
-    plt.xlabel('Artists')
-    plt.ylabel('Listeners')
-    title = "Top 10 artists by listeners"
-    plt.title(title, fontsize=20)
+    plt.xlabel('Artists' , fontsize=18)
+    plt.ylabel('Number of Monthly Listeners', fontsize=18)
+    title = "Top 10 Artists by Monthly Listeners"
+    plt.title(title, fontsize=25)
     plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_battle/top_10_artists_by_listeners_bar.png')
 
