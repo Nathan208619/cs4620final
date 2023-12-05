@@ -38,7 +38,6 @@ def plot_artist_songs_chart(artist):
     plt.savefig('./static/visualizations/artist_songs.png')
 
 def plot_artist_album_chart(artist):
-    # Query the albums_streams table
     conn = sqlite3.connect("music.db")
     query = "SELECT album, streams FROM most_streamed_album WHERE artist=" + "'" + artist + "'"
     data = query_the_database(conn, query)
@@ -123,7 +122,7 @@ def song_page():
 
 @app.route('/albums', methods=['GET'])
 def album_page():
-    return render_template('artists-comparisons.html')
+    return render_template('artist_comparisons.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

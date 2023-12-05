@@ -29,11 +29,12 @@
         } */
 
         h1 {
-            color: #1db954;
+            color: darkmagenta
         }
 
         h2 {
-            color: #1db954;
+            color: darkcyan;
+            text-align: center;
         }
 
         img {
@@ -43,13 +44,25 @@
             display: block;
         }
 
-        /* .dropshadowimg {
-            box-shadow: 5px 5px 5px #999;
-        } */
+        .prev-button {
+            margin: 20px 0; 
+            float: left;
+        }
+
+        .prev-button img {
+            width: 100px;
+            height: 100px;
+            justify-content: left;
+            margin-right: 20px;
+        }
     </style>
 </head>
 
 <body>
+    <a class="prev-button" href="{{ url_for('main') }}">
+        <img src="{{ url_for('static', filename='back.png') }}" alt="Prev Button">
+    </a>
+
     <h1>Here are some visualizations for the most streamed songs and ablums on Spotify</h1>
     <h2>Who is at the top?</h2>
     <img src="{{ url_for('static', filename='visualizations/most_streamed_songs.png') }}" alt="Chart 1"
@@ -94,6 +107,10 @@
 
     <h2>Here are the most streamed songs of 2020<h2>
     <img src="{{ url_for('static', filename='visualizations/2020.png') }}" alt="Chart 12" class="dropshadowimg">
+
+    <a class="prev-button" href="{{ url_for('main') }}">
+        <img src="{{ url_for('static', filename='back.png') }}" alt="Prev Button">
+    </a>
 
 </body>
 

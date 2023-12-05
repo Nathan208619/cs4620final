@@ -24,15 +24,30 @@
 
         h2
         {
-            color: black;
+            color: darkcyan;
             -webkit-text-stroke-color: white;
             padding: 10px;
             font-size: 30px;
+            text-align: center;
+        }
+        
+        .prev-button {
+            margin: 20px 0; 
+            float: left;
         }
 
-    </style>
+        .prev-button img {
+            width: 100px;
+            height: 100px;
+            justify-content: left;
+        }
+        
+        </style>
 </head>
 <body>
+    <a class="prev-button" href="{{ url_for('artist_page') }}">
+        <img src="{{ url_for('static', filename='back.png') }}" alt="Prev Button">
+    </a>
     <h1>How does {{ artist_name }} perform?</h1>
     <h2>Among their songs in the top 2000, here is how {{ artist_name }}'s songs stack up as a percentages of their total streams in the top 2000:</h2>
     <img src="{{ url_for('static', filename='visualizations/artist_songs.png') }}" alt="Chart 1">
@@ -44,6 +59,8 @@
     <img src="{{ url_for('static', filename='visualizations/artist_daily_bar.png') }}" alt="Chart 3">
     <img src="{{ url_for('static', filename='visualizations/artist_daily_pie.png') }}" alt="Chart 3">
 
-
+    <a class="prev-button" href="{{ url_for('artist_page') }}">
+        <img src="{{ url_for('static', filename='back.png') }}" alt="Prev Button">
+    </a>
 </body>
 </html>
