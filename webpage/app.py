@@ -30,8 +30,8 @@ def plot_artist_album_chart(artist):
     # Create the bar chart
     plt.figure(figsize=(12, 8))
     plt.bar(titles, album_streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Titles')
-    plt.ylabel('Album Streams')
+    plt.xlabel('Titles', fontsize=18)
+    plt.ylabel('Album Streams', fontsize=18)
     title = f"{artist}'s most streamed albums among the top 200"
     plt.title(title, fontsize=20)
     
@@ -53,9 +53,9 @@ def plot_artist_songs_chart(artist):
     titles, daily_streams = zip(*data)
 
     # query the database
-    plt.subplots(figsize=(15, 12))
-    plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
-    plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small')
+    plt.subplots(figsize=(25, 25))
+    plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
+    plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='large', title_fontsize='xx-large')
 
     plt.axis('equal')
     plt.tight_layout()
@@ -72,8 +72,8 @@ def build_artist_top_songs_by_daily_streams(artist):
     titles, daily_streams = zip(*data)
 
     plt.subplots(figsize=(10, 8))
-    plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors)
-    plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small')
+    plt.pie(daily_streams, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired.colors, textprops={'fontsize': 18})
+    plt.legend(titles, title='Track Legend', bbox_to_anchor=(1, 0.5), loc="center", fontsize='small', title_fontsize='medium')
 
     plt.axis('equal') 
     plt.title(f"{artist}'s top songs by daily streams", fontsize=20)
@@ -84,11 +84,12 @@ def build_artist_top_songs_by_daily_streams(artist):
     # create bar chart
     plt.figure(figsize=(12, 10))
     plt.bar(titles, daily_streams, color=cm.Paired.colors, edgecolor='black')
-    plt.xlabel('Titles')
-    plt.ylabel('Streams')
+    plt.xlabel('Titles', fontsize=18)
+    plt.ylabel('Streams', fontsize=18)
     title = f"{artist}'s top songs by daily streams"
     plt.title(title, fontsize=20)
-    plt.xticks(rotation=45, ha='right', fontsize=18) 
+    plt.xticks(rotation=45, ha='right', fontsize=18)
+    plt.yticks(fontsize=18)
     plt.tight_layout()
     plt.savefig('./static/visualizations/artist_daily_bar.png')
 

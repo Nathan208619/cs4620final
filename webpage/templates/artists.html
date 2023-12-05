@@ -7,11 +7,75 @@
     <title>Enter an Artist's Name</title>
 </head>
 
+<style>
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: silver 1px solid;
+}
+
+input[type="submit"] {
+    padding: 30px 30px;
+            font-size: 24px;
+            border: hwb(from color h w b);
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+            background: linear-gradient(to right, #ffffff, #e0e0e0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+}
+
+input:hover {
+    background: linear-gradient(to right, #ffffff, #f0f0f0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: white;
+    font-size: 80px;
+    margin-bottom: 20px;
+    -webkit-text-stroke: black 1px;
+    padding: 10px;
+}
+
+</style>
+
 <body>
-    <h1>Enter an Artist's Name:</h1>
+    <h1>Enter an Artist's Name :</h1>
 
     <form action="/artists" method="post">
-        <label for="artist_name">Artist Name:</label>
+        <!-- <label for="artist_name">Artist Name:</label> -->
         <input type="text" id="artist_name" name="artist_name" required>
         <input type="submit" value="Submit">
     </form>
