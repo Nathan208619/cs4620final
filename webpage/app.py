@@ -5,6 +5,20 @@ import matplotlib.cm as cm
 
 app = Flask(__name__)
 
+def check_if_artist_exists(artist):
+    conn = sqlite3.connect("music.db")
+    query = "SELECT artist FROM most_streams WHERE artist=" + "'" + artist + "'"
+    data = query_the_database(conn, query)
+    query2 = "SELECT artist FROM most_streamed_album WHERE artist=" + "'" + artist + "'"
+    data2 = query_the_database(conn, query2)
+    conn.close()
+    if len(data) == 0 or len(data2) == 0:
+        print(f"No data found for the artist: {artist}")
+        return False
+    print(f"Data found for the artist: {artist}")
+    return True
+    
+
 def query_the_database(conn, query):
     try:
         c = conn.cursor()
@@ -101,11 +115,15 @@ def main():
 @app.route('/artists', methods=['GET', 'POST'])
 def artist_page():
     if request.method == 'POST':
-        artist_name = request.form['artist_name'].lower()   
+        artist_name = request.form['artist_name'].lower()
         names = artist_name.split(" ")
         names = [name.capitalize() for name in names]
         artist_name = " ".join(names)
+        if check_if_artist_exists(artist_name) == False:
+            print("here")
+            return render_template('error.html')
         print(artist_name)
+        
         plot_artist_album_chart(artist_name)
         plot_artist_songs_chart(artist_name)
         build_artist_top_songs_by_daily_streams(artist_name)
