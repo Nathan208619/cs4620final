@@ -7,12 +7,18 @@ app = Flask(__name__)
 
 def check_if_artist_exists(artist):
     conn = sqlite3.connect("music.db")
-    query = "SELECT total_streams FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' ORDER BY total_streams LIMIT 1"
+    query = "SELECT streams_id FROM most_streams, most_streamed_artist WHERE most_streams.artist_id = most_streamed_artist.artist_id AND artist='" + artist + "' AND streams_id < 2469"
     data = query_the_database(conn, query)
-    print(data)
-
+    query = "SELECT album FROM most_streamed_album JOIN most_streamed_artist ON most_streamed_album.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "'"
+    data2 = query_the_database(conn, query)
+    # query = "SELECT streams FROM most_streamed_artist WHERE artist='" + artist + "'"
+    # data3 = query_the_database(conn, query)
     conn.close()
-    if len(data) == 0 or data == [(0,)]:
+    
+    if len(data) == 0:
+        print(f"No data found for the artist: {artist}")
+        return False
+    if len(data2) == 0:
         print(f"No data found for the artist: {artist}")
         return False
     print(f"Data found for the artist: {artist}")
@@ -34,7 +40,7 @@ def plot_artist_songs_chart(artist):
 
     # query the database
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, total_streams FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' ORDER BY total_streams DESC"
+    query = "SELECT title, total_streams FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' AND total_streams != 0 ORDER BY total_streams DESC"
     data = query_the_database(conn, query)
     conn.close()
     if data is None:
@@ -120,10 +126,7 @@ def artist_page():
         names = [name.capitalize() for name in names]
         artist_name = " ".join(names)
         if check_if_artist_exists(artist_name) == False:
-            print("here")
             return render_template('error.html')
-        print(artist_name)
-        
         plot_artist_album_chart(artist_name)
         plot_artist_songs_chart(artist_name)
         build_artist_top_songs_by_daily_streams(artist_name)

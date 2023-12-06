@@ -1,1 +1,1 @@
-SELECT streams_id FROM most_streams WHERE title="Dil Ko Karaar Aaya (From "Sukoon")";
+SELECT streams_id FROM most_streams, most_streamed_artist WHERE most_streams.artist_id = most_streamed_artist.artist_id AND artist='Kenshi Yonezu' AND streams_id < 2469
