@@ -1,1 +1,1 @@
-SELECT artist, streams FROM most_streamed_artist ORDER BY streams DESC LIMIT 10;
+SELECT streams_id FROM most_streams WHERE title="Dil Ko Karaar Aaya (From "Sukoon")";

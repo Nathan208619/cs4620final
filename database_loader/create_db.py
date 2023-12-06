@@ -58,7 +58,7 @@ def generate_database():
     
     most_streams_of_year = """CREATE TABLE IF NOT EXISTS most_streams_of_year (
                     streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    title text NOT NULL,
+                    song_id integer NOT NULL,
                     artist_id integer NOT NULL,
                     total_streams integer NOT NULL,
                     daily_streams integer,

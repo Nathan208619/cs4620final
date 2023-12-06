@@ -147,26 +147,37 @@ def build_year_table(year):
         if artist.__contains__('"'):
             continue
         title = parts[1]
+        if title.__contains__('From'):
+            continue
         total_streams = parts[2].replace(",", "")
         daily_streams = parts[3].replace(",", "")
         artist_id = get_artist_id(conn, cur, artist)
-        command = "INSERT INTO most_streams_of_year (title, artist_id, total_streams, daily_streams, year) VALUES (?, ?, ?, ?, ?)"
-        cur.execute(command, (title, artist_id, total_streams, daily_streams, year))
+        song_id = get_song_id(conn, cur, title, artist_id)
+        command = "INSERT INTO most_streams_of_year (song_id, artist_id, total_streams, daily_streams, year) VALUES (?, ?, ?, ?, ?)"
+        cur.execute(command, (song_id, artist_id, total_streams, daily_streams, year))
         conn.commit()
 
 def get_artist_id(conn, cur, artist_name):
-    # print(artist_name)
     query = "SELECT artist_id FROM most_streamed_artist WHERE artist=" + '"' + artist_name + '"'
-    print(artist_name)
     cur.execute(query)
     result = cur.fetchone()
 
     if result:
-        # If the artist exists, return the existing artist_id
         return result[0]
     else:
-        # If the artist doesn't exist, insert the new artist and return the generated artist_id
         cur.execute("INSERT INTO most_streamed_artist (artist, streams, daily_streams, stream_as_lead, stream_as_feature, streams_solo) VALUES (?, ?, ?, ?, ?, ?)", (artist_name, 0, 0, 0, 0, 0))
+        conn.commit()
+        return cur.lastrowid
+    
+def get_song_id(conn, cur, song_name, artist_id):
+    query = "SELECT streams_id FROM most_streams WHERE title=" + '"' + song_name + '"'
+    cur.execute(query)
+    result = cur.fetchone()
+
+    if result:
+        return result[0]
+    else:
+        cur.execute("INSERT INTO most_streams (title, artist_id, total_streams, daily_streams) VALUES (?, ?, ?, ?)", (song_name, artist_id, 0, 0))
         conn.commit()
         return cur.lastrowid
 

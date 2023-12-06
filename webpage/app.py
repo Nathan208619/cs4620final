@@ -7,10 +7,12 @@ app = Flask(__name__)
 
 def check_if_artist_exists(artist):
     conn = sqlite3.connect("music.db")
-    query = "SELECT artist FROM most_streamed_artist WHERE artist=" + "'" + artist + "'"
+    query = "SELECT total_streams FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' ORDER BY total_streams LIMIT 1"
     data = query_the_database(conn, query)
+    print(data)
+
     conn.close()
-    if len(data) == 0:
+    if len(data) == 0 or data == [(0,)]:
         print(f"No data found for the artist: {artist}")
         return False
     print(f"Data found for the artist: {artist}")
