@@ -7,7 +7,8 @@ response = requests.get(url)# make request to website
 
 # check for request success
 if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser') # make soup object, grab html from website
+    decode = response.content.decode('utf-8')
+    soup = BeautifulSoup(decode, 'html.parser')# make soup object, grab html from website
     table = soup.find('table')# get table containing song data
     # is table found?
     if table:

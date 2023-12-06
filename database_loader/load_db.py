@@ -11,7 +11,7 @@ def create_connection(db_file):
 
 def get_data():
     most_streams = []
-    file = open("./data/most_streams.csv", "r", encoding="utf-8")
+    file = open("../data/most_streams.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
@@ -28,6 +28,8 @@ def build_streams_table():
         if parts.__len__() != 4:
             continue
         artist = parts[0]
+        if artist.__contains__('"'):
+            continue
         title = parts[1]
         total_streams = parts[2].replace(",", "")
         daily_streams = parts[3]
@@ -35,13 +37,15 @@ def build_streams_table():
             daily_streams = '0'
         else:
             daily_streams = daily_streams.replace(",", "")
-        # cur.execute("INSERT INTO most_streams (streams_id, title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?, ?)", (id, title, artist, total_streams, daily_streams))
-        cur.execute("INSERT INTO most_streams (title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?)", (title, artist, total_streams, daily_streams))
+
+        artist_id = get_artist_id(conn, cur, artist)
+
+        cur.execute("INSERT INTO most_streams (title, artist_id, total_streams, daily_streams) VALUES (?, ?, ?, ?)", (title, artist_id, total_streams, daily_streams))
         conn.commit()
     conn.close()
 
 def build_listeners_table():
-    file = open("./data/listeners.csv", "r", encoding="utf-8")
+    file = open("../data/listeners.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:
@@ -49,17 +53,21 @@ def build_listeners_table():
         if parts.__len__() != 5:
             continue
         artist = parts[0]
+        if artist.__contains__('"'):
+            continue
         listeners = parts[1].replace(",", "")
         daily_listeners = parts[2].replace(",", "")
         peak_listeners = parts[4].replace(",", "")
         peak_position = parts[3]
-        cur.execute("INSERT INTO most_listeners (artist, listeners, daily_listeners, peak_listeners, peak_position) VALUES (?, ?, ?, ?, ?)", (artist, listeners, daily_listeners, peak_listeners, peak_position))
+        artist_id = get_artist_id(conn, cur, artist)
+
+        cur.execute("INSERT INTO most_listeners (artist_id, listeners, daily_listeners, peak_listeners, peak_position) VALUES (?, ?, ?, ?, ?)", (artist_id, listeners, daily_listeners, peak_listeners, peak_position))
         conn.commit()
     conn.close()
 
 def get_album_data():
     most_streams = []
-    file = open("./data/albums.csv", "r", encoding="utf-8")
+    file = open("../data/albums.csv", "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
         end = line[line.find("-") + 2:].replace("\n", "")
@@ -75,16 +83,20 @@ def build_albums_table():
         parts = entry.split("-")
         if parts.__len__() != 4:
             continue
-        artist = parts[1]
-        album = parts[0]
+        artist = parts[0]
+        if artist.__contains__('"'):
+            continue
+        album = parts[1]
         streams = parts[2].replace(",", "")
         daily_streams = parts[3].replace(",", "")
-        cur.execute("INSERT INTO most_streamed_album (artist, album, streams, daily_streams) VALUES (?, ?, ?, ?)", (album, artist, streams, daily_streams))
+
+        artist_id = get_artist_id(conn, cur, artist)
+        cur.execute("INSERT INTO most_streamed_album (album, artist_id, streams, daily_streams) VALUES (?, ?, ?, ?)", (album, artist_id, streams, daily_streams))
         conn.commit()
     conn.close()
 
 def build_artists_table():
-    file = open("./data/artists.csv", "r", encoding="utf-8")
+    file = open("../data/artists.csv", "r", encoding="utf-8")
     conn = create_connection("music.db")
     cur = conn.cursor()
     for line in file:
@@ -92,6 +104,8 @@ def build_artists_table():
         if parts.__len__() != 6:
             continue
         artist = parts[0]
+        if artist.__contains__('"'):
+            continue
         streams = parts[1].replace(",", "")
         daily_streams = parts[2].replace(",", "")
         if len(daily_streams) < 1:
@@ -112,7 +126,7 @@ def build_artists_table():
 
 def get_year_data(year):
     year_streams = []
-    path = "./data/" + year + ".csv"
+    path = "../data/" + year + ".csv"
     file = open(path, "r", encoding="utf-8")
     for line in file:
         front = line[:line.find("-") - 1]
@@ -130,20 +144,38 @@ def build_year_table(year):
         if parts.__len__() != 4:
             continue
         artist = parts[0]
+        if artist.__contains__('"'):
+            continue
         title = parts[1]
         total_streams = parts[2].replace(",", "")
         daily_streams = parts[3].replace(",", "")
-        command = "INSERT INTO most_streams_of_" + year + " (title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?)"
-        cur.execute(command, (title, artist, total_streams, daily_streams))
-        # cur.execute("INSERT INTO most_streams_of_" + year + " (title, artist, total_streams, daily_streams) VALUES (?, ?, ?, ?)", (title, artist, total_streams, daily_streams))
+        artist_id = get_artist_id(conn, cur, artist)
+        command = "INSERT INTO most_streams_of_year (title, artist_id, total_streams, daily_streams, year) VALUES (?, ?, ?, ?, ?)"
+        cur.execute(command, (title, artist_id, total_streams, daily_streams, year))
         conn.commit()
 
+def get_artist_id(conn, cur, artist_name):
+    # print(artist_name)
+    query = "SELECT artist_id FROM most_streamed_artist WHERE artist=" + '"' + artist_name + '"'
+    print(artist_name)
+    cur.execute(query)
+    result = cur.fetchone()
+
+    if result:
+        # If the artist exists, return the existing artist_id
+        return result[0]
+    else:
+        # If the artist doesn't exist, insert the new artist and return the generated artist_id
+        cur.execute("INSERT INTO most_streamed_artist (artist, streams, daily_streams, stream_as_lead, stream_as_feature, streams_solo) VALUES (?, ?, ?, ?, ?, ?)", (artist_name, 0, 0, 0, 0, 0))
+        conn.commit()
+        return cur.lastrowid
 
 
+
+build_artists_table()
 build_streams_table()
 build_listeners_table()
 build_albums_table()
-build_artists_table()
 build_year_table("2020")
 build_year_table("2021")
 build_year_table("2022")

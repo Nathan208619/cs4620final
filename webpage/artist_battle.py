@@ -172,7 +172,7 @@ def most_streamed_artist_by_daily_streams():
 
 def top_10_artists_by_listeners():
     conn = sqlite3.connect("music.db")
-    query = "SELECT artist, listeners FROM most_listeners ORDER BY listeners DESC LIMIT 10"
+    query = "SELECT artist, listeners FROM most_listeners JOIN most_streamed_artist ON most_listeners.artist_id = most_streamed_artist.artist_id ORDER BY listeners DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     artists, listeners = zip(*data)

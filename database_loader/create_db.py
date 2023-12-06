@@ -24,14 +24,14 @@ def generate_database():
     streams = """ CREATE TABLE IF NOT EXISTS most_streams (
                     streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                     title text NOT NULL,
-                    artist text NOT NULL,
+                    artist_id integer NOT NULL,
                     total_streams integer NOT NULL,
                     daily_streams integer
                                     ); """
 
     listeners = """CREATE TABLE IF NOT EXISTS most_listeners (
                     listeners_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                    artist text NOT NULL,
+                    artist_id integer NOT NULL,
                     listeners integer NOT NULL,
                     daily_listeners integer,
                     peak_listeners integer,
@@ -41,7 +41,7 @@ def generate_database():
     albums = """CREATE TABLE IF NOT EXISTS most_streamed_album (
                     album_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                     album text NOT NULL,
-                    artist text NOT NULL,
+                    artist_id integer NOT NULL,
                     streams integer NOT NULL,
                     daily_streams integer
                                 );"""
@@ -56,37 +56,15 @@ def generate_database():
                     streams_solo integer
                                 );"""
     
-    most_streams_of_2020 = """CREATE TABLE IF NOT EXISTS most_streams_of_2020 (
+    most_streams_of_year = """CREATE TABLE IF NOT EXISTS most_streams_of_year (
                     streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
                     title text NOT NULL,
-                    artist text NOT NULL,
+                    artist_id integer NOT NULL,
                     total_streams integer NOT NULL,
-                    daily_streams integer
+                    daily_streams integer,
+                    year integer NOT NULL
                             );"""
     
-    most_streams_of_2021 = """CREATE TABLE IF NOT EXISTS most_streams_of_2021 (
-                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                title text NOT NULL,
-                artist text NOT NULL,
-                total_streams integer NOT NULL,
-                daily_streams integer
-                        );"""
-    
-    most_streams_of_2022 = """CREATE TABLE IF NOT EXISTS most_streams_of_2022 (
-                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                title text NOT NULL,
-                artist text NOT NULL,
-                total_streams integer NOT NULL,
-                daily_streams integer
-                        );"""
-    
-    most_streams_of_2023 = """CREATE TABLE IF NOT EXISTS most_streams_of_2023 (
-                streams_id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                title text NOT NULL,
-                artist text NOT NULL,
-                total_streams integer NOT NULL,
-                daily_streams integer
-                        );"""
     # create a database connection
     conn = create_connection(database)
 
@@ -105,16 +83,8 @@ def generate_database():
         create_table(conn, artists)
 
         # create most_streams_of_2020 table
-        create_table(conn, most_streams_of_2020)
+        create_table(conn, most_streams_of_year)
 
-        # create most_streams_of_2021 table
-        create_table(conn, most_streams_of_2021)
-
-        # create most_streams_of_2022 table
-        create_table(conn, most_streams_of_2022)
-
-        # create most_streams_of_2023 table
-        create_table(conn, most_streams_of_2023)
     else:
         print("Error: cannot create the database connection")
 

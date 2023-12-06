@@ -7,12 +7,10 @@ app = Flask(__name__)
 
 def check_if_artist_exists(artist):
     conn = sqlite3.connect("music.db")
-    query = "SELECT artist FROM most_streams WHERE artist=" + "'" + artist + "'"
+    query = "SELECT artist FROM most_streamed_artist WHERE artist=" + "'" + artist + "'"
     data = query_the_database(conn, query)
-    query2 = "SELECT artist FROM most_streamed_album WHERE artist=" + "'" + artist + "'"
-    data2 = query_the_database(conn, query2)
     conn.close()
-    if len(data) == 0 or len(data2) == 0:
+    if len(data) == 0:
         print(f"No data found for the artist: {artist}")
         return False
     print(f"Data found for the artist: {artist}")
@@ -34,7 +32,7 @@ def plot_artist_songs_chart(artist):
 
     # query the database
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, total_streams FROM most_streams WHERE artist=" + "'" + artist + "'"
+    query = "SELECT title, total_streams FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' ORDER BY total_streams DESC"
     data = query_the_database(conn, query)
     conn.close()
     if data is None:
@@ -53,7 +51,7 @@ def plot_artist_songs_chart(artist):
 
 def plot_artist_album_chart(artist):
     conn = sqlite3.connect("music.db")
-    query = "SELECT album, streams FROM most_streamed_album WHERE artist=" + "'" + artist + "'"
+    query = "SELECT album, most_streamed_album.streams FROM most_streamed_album JOIN most_streamed_artist ON most_streamed_album.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "' ORDER BY most_streamed_album.streams DESC"
     data = query_the_database(conn, query)
     conn.close()
     if data is None:
@@ -76,7 +74,7 @@ def plot_artist_album_chart(artist):
 
 def build_artist_top_songs_by_daily_streams(artist):
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, daily_streams FROM most_streams WHERE artist='" + artist + "' ORDER BY daily_streams DESC LIMIT 10"
+    query = "SELECT title, most_streams.daily_streams FROM most_streams JOIN most_streamed_artist ON most_streamed_artist.artist_id = most_streams.artist_id WHERE artist='" + artist + "' ORDER BY most_streams.daily_streams DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     if data is None:

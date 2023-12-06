@@ -14,7 +14,7 @@ def query_the_database(conn, query):
 
 def top_ten_most_streamed_songs():
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, total_streams FROM most_streams WHERE streams_id <= 10 ORDER BY total_streams DESC"
+    query = "SELECT title, total_streams FROM most_streams ORDER BY total_streams DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     titles, streams = zip(*data)
@@ -55,7 +55,7 @@ def top_ten_least_streamed_songs():
 
 def top_ten_most_streamed_songs_of_year(year):
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, total_streams FROM most_streams_of_" + year + " WHERE streams_id <= 10 ORDER BY total_streams DESC"
+    query = "SELECT title, total_streams FROM most_streams_of_year WHERE year=" + year + " ORDER BY total_streams DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     titles, streams = zip(*data)
@@ -75,7 +75,8 @@ def top_ten_most_streamed_songs_of_year(year):
 
 def artists_with_most_songs_top_2000():
     conn = sqlite3.connect("music.db")
-    query = "SELECT artist, COUNT(title) FROM most_streams GROUP BY artist ORDER BY COUNT(title) DESC LIMIT 10"
+
+    query = "SELECT artist, COUNT(title) FROM most_streams JOIN most_streamed_artist ON most_streams.artist_id = most_streamed_artist.artist_id GROUP BY artist ORDER BY COUNT(title) DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     artists, songs = zip(*data)
@@ -139,7 +140,7 @@ def top_ten_least_streamed_albums():
 
 def artist_with_the_most_albums_in_top_200():
     conn = sqlite3.connect("music.db")
-    query = "SELECT artist, COUNT(album) FROM most_streamed_album GROUP BY artist ORDER BY COUNT(album) DESC LIMIT 10"
+    query = "SELECT artist, COUNT(album) FROM most_streamed_album JOIN most_streamed_artist ON most_streamed_album.artist_id = most_streamed_artist.artist_id GROUP BY artist ORDER BY COUNT(album) DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     artists, albums = zip(*data)

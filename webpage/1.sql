@@ -1,0 +1,1 @@
+SELECT artist, streams FROM most_streamed_artist ORDER BY streams DESC LIMIT 10;
