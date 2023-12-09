@@ -54,7 +54,7 @@ def top_ten_least_streamed_songs():
 
 def top_ten_most_streamed_songs_of_year(year):
     conn = sqlite3.connect("music.db")
-    query = "SELECT title, most_streams_of_year.total_streams FROM most_streams JOIN most_streams_of_year ON most_streams.streams_id = most_streams_of_year.song_id WHERE year=2020 ORDER BY most_streams_of_year.total_streams DESC LIMIT 10"
+    query = "SELECT title, most_streams_of_year.total_streams FROM most_streams JOIN most_streams_of_year ON most_streams.streams_id = most_streams_of_year.song_id WHERE year='" + year + "' ORDER BY most_streams_of_year.total_streams DESC LIMIT 10"
     data = query_the_database(conn, query)
     conn.close()
     titles, streams = zip(*data)
