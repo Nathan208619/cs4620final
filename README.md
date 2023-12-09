@@ -10,11 +10,11 @@ streamed artists, songs, and albums on Spotify
 1. Clone the repository.
 2. Install Python3.
 3. Pip install these libraries
-    -pip install Flask
-    -pip install matplotlib
-    -pip install sqlite3
-    -pip install requests
-    -pip install beautifulsoup4
+    - pip install Flask
+    - pip install matplotlib
+    - pip install sqlite3
+    - pip install requests
+    - pip install beautifulsoup4
 
 ## Usage
 Run the build script, ./build.sh from the root directory of the project
