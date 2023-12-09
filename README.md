@@ -17,5 +17,5 @@ streamed artists, songs, and albums on Spotify
     - pip install beautifulsoup4
 
 ## Usage
-Run the build script, ./build.sh from the root directory of the project
-Open the website, it is hosted locally, http://127.0.0.1:5000/
+1. Run the build script, ./build.sh from the root directory of the project
+3. Open the website, it is hosted locally, http://127.0.0.1:5000/

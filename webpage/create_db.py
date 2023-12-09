@@ -82,7 +82,7 @@ def generate_database():
         # create most_streamed_artist table
         create_table(conn, artists)
 
-        # create most_streams_of_2020 table
+        # create most_streams_of_year table
         create_table(conn, most_streams_of_year)
 
     else:

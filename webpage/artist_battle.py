@@ -142,8 +142,6 @@ def stacked_bar_chart():
     plt.bar(artists, stream_as_feature, color='orange', label='Feature', edgecolor='black', bottom=bottom)
     bottom = [bottom[i] + stream_as_feature[i] for i in range(len(bottom))]
 
-    # Plotting bars for solo streams
-    # plt.bar(artists, streams_solo, color='green', label='Solo', edgecolor='black', bottom=bottom)
     plt.xticks(rotation=28, ha='right', fontsize=18)
     plt.yticks(fontsize=18)
     plt.legend()

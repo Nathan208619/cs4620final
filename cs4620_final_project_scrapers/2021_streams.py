@@ -13,7 +13,7 @@ if response.status_code == 200:
     # is table found?
     if table:
         rows = table.find_all('tr')[1:] # get all rows in the table except the first one
-        # Extract and print the song titles
+        # extract and print the song titles
         for row in rows:
             # grab title-artist and stream count cells
             cell_parts = row.find_all('td')

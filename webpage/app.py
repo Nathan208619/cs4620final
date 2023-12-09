@@ -11,8 +11,6 @@ def check_if_artist_exists(artist):
     data = query_the_database(conn, query)
     query = "SELECT album FROM most_streamed_album JOIN most_streamed_artist ON most_streamed_album.artist_id = most_streamed_artist.artist_id WHERE artist='" + artist + "'"
     data2 = query_the_database(conn, query)
-    # query = "SELECT streams FROM most_streamed_artist WHERE artist='" + artist + "'"
-    # data3 = query_the_database(conn, query)
     conn.close()
     
     if len(data) == 0:
@@ -30,7 +28,6 @@ def query_the_database(conn, query):
         c = conn.cursor()
         c.execute(query)
         rows = c.fetchall()
-        # print(rows)
         return rows
     except sqlite3.Error as e:
         print(e)
