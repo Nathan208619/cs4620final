@@ -41,8 +41,7 @@ def top_ten_least_streamed_songs():
 
     # create scatter plot
     plt.figure(figsize=(12, 8))
-    cmap = get_cmap("Set1")
-    colors = cmap(range(len(titles)))
+    colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black']
     plt.scatter(titles, streams, color=colors, edgecolor='black', s=250)
     plt.xlabel('Titles', fontsize=18)
     plt.ylabel('Streams', fontsize=18)
@@ -65,7 +64,7 @@ def top_ten_most_streamed_songs_of_year(year):
     plt.bar(titles, streams, color=cm.Paired.colors, edgecolor='black')
     plt.xlabel('Titles', fontsize=18)
     plt.ylabel('Streams', fontsize=18)
-    title = "Top 10 most streamed songs of 2023"
+    title = "Top 10 most streamed songs of " + year
     plt.title(title, fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)
     plt.yticks(fontsize=18)
@@ -127,8 +126,7 @@ def top_ten_least_streamed_albums():
     albums, streams = zip(*data)
     # create scatter plot
     plt.figure(figsize=(12, 8))
-    cmap = get_cmap("Set1")
-    colors = cmap(range(len(albums)))
+    colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black']
     plt.scatter(albums, streams, color=colors, edgecolor='black', s=250)
     plt.xlabel('Albums', fontsize=18) 
     plt.ylabel('Streams', fontsize=18)
