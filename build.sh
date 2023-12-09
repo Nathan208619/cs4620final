@@ -22,13 +22,9 @@ python3 ./2021_streams.py > ../data/2021.csv
 python3 ./2022_streams.py > ../data/2022.csv
 python3 ./2023_streams.py > ../data/2023.csv
 cd ..
-cd database_loader
-rm music.db
+cd webpage
 python3 create_db.py
 python3 load_db.py
-cp music.db ../webpage
-cd ..
-cd webpage
 python3 song_page_visuals.py
 python3 artist_battle.py
 python3 app.py
