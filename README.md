@@ -18,4 +18,4 @@ streamed artists, songs, and albums on Spotify
 
 ## Usage
 1. Run the build script, ./build.sh from the root directory of the project
-3. Open the website, it is hosted locally, http://127.0.0.1:5000/
+2. Open the website, it is hosted locally, http://127.0.0.1:5000/
